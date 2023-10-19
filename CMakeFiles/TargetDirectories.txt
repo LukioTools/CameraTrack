@@ -1,0 +1,3 @@
+/home/hiha/c++/Camera/CMakeFiles/DisplayImage.dir
+/home/hiha/c++/Camera/CMakeFiles/edit_cache.dir
+/home/hiha/c++/Camera/CMakeFiles/rebuild_cache.dir

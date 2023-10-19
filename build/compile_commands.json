@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/hiha/c++/Camera/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/DisplayImage.dir/main.cpp.o -c /home/hiha/c++/Camera/main.cpp",
+  "file": "/home/hiha/c++/Camera/main.cpp"
+}
+]
