@@ -358,4 +358,6 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: /home/hiha/c++/Camera/main.cpp \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
  /usr/local/include/opencv4/opencv2/calib3d/calib3d.hpp \
  /usr/local/include/opencv4/opencv2/highgui/highgui.hpp \
- /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp
+ /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
+ /home/hiha/c++/Camera/pointFinder.hpp \
+ /home/hiha/c++/Camera/Triangulation.hpp

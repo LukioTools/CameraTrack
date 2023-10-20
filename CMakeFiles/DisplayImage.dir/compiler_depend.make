@@ -3,8 +3,7 @@
 
 CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
   /usr/include/stdc-predef.h \
-  /usr/local/include/opencv4/opencv2/opencv.hpp \
-  /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
+  /usr/local/include/opencv4/opencv2/calib3d.hpp \
   /usr/local/include/opencv4/opencv2/core.hpp \
   /usr/local/include/opencv4/opencv2/core/cvdef.h \
   /usr/local/include/opencv4/opencv2/core/version.hpp \
@@ -96,6 +95,7 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
   /usr/include/c++/12/bits/predefined_ops.h \
   /usr/include/c++/12/bits/range_access.h \
   /usr/local/include/opencv4/opencv2/core/base.hpp \
+  /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
   /usr/include/c++/12/climits \
   /usr/lib/gcc/x86_64-linux-gnu/12/include/limits.h \
   /usr/lib/gcc/x86_64-linux-gnu/12/include/syslimits.h \
@@ -311,12 +311,15 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
   /usr/local/include/opencv4/opencv2/core/optim.hpp \
   /usr/local/include/opencv4/opencv2/core/ovx.hpp \
   /usr/local/include/opencv4/opencv2/core/cvdef.h \
-  /usr/local/include/opencv4/opencv2/calib3d.hpp \
   /usr/local/include/opencv4/opencv2/features2d.hpp \
   /usr/local/include/opencv4/opencv2/flann/miniflann.hpp \
   /usr/local/include/opencv4/opencv2/flann/defines.h \
   /usr/local/include/opencv4/opencv2/flann/config.h \
   /usr/local/include/opencv4/opencv2/core/affine.hpp \
+  /usr/local/include/opencv4/opencv2/highgui.hpp \
+  /usr/local/include/opencv4/opencv2/imgcodecs.hpp \
+  /usr/local/include/opencv4/opencv2/videoio.hpp \
+  /usr/local/include/opencv4/opencv2/opencv.hpp \
   /usr/local/include/opencv4/opencv2/dnn.hpp \
   /usr/local/include/opencv4/opencv2/dnn/dnn.hpp \
   /usr/local/include/opencv4/opencv2/core/async.hpp \
@@ -376,9 +379,6 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
   /usr/local/include/opencv4/opencv2/flann/index_testing.h \
   /usr/local/include/opencv4/opencv2/flann/timer.h \
   /usr/local/include/opencv4/opencv2/flann/sampling.h \
-  /usr/local/include/opencv4/opencv2/highgui.hpp \
-  /usr/local/include/opencv4/opencv2/imgcodecs.hpp \
-  /usr/local/include/opencv4/opencv2/videoio.hpp \
   /usr/local/include/opencv4/opencv2/imgproc.hpp \
   /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
   /usr/local/include/opencv4/opencv2/ml.hpp \
@@ -424,8 +424,48 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
   /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
   /usr/local/include/opencv4/opencv2/calib3d/calib3d.hpp \
   /usr/local/include/opencv4/opencv2/highgui/highgui.hpp \
-  /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp
+  /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
+  pointFinder.hpp \
+  Triangulation.hpp \
+  /usr/include/c++/12/regex \
+  /usr/include/c++/12/bitset \
+  /usr/include/c++/12/stack \
+  /usr/include/c++/12/bits/stl_stack.h \
+  /usr/include/c++/12/bits/regex_constants.h \
+  /usr/include/c++/12/bits/regex_error.h \
+  /usr/include/c++/12/bits/regex_automaton.h \
+  /usr/include/c++/12/bits/regex_automaton.tcc \
+  /usr/include/c++/12/bits/regex_scanner.h \
+  /usr/include/c++/12/bits/regex_scanner.tcc \
+  /usr/include/c++/12/bits/regex_compiler.h \
+  /usr/include/c++/12/bits/regex_compiler.tcc \
+  /usr/include/c++/12/bits/regex.h \
+  /usr/include/c++/12/bits/regex.tcc \
+  /usr/include/c++/12/bits/regex_executor.h \
+  /usr/include/c++/12/bits/regex_executor.tcc \
+  Camera.hpp \
+  performance.hpp
 
+
+/usr/include/c++/12/bits/regex_executor.h:
+
+/usr/include/c++/12/bits/regex.h:
+
+/usr/include/c++/12/bits/regex_scanner.tcc:
+
+/usr/include/c++/12/bits/regex_scanner.h:
+
+/usr/include/c++/12/bits/regex_automaton.tcc:
+
+/usr/include/c++/12/bits/regex_automaton.h:
+
+/usr/include/c++/12/bits/stl_stack.h:
+
+/usr/include/c++/12/bitset:
+
+Triangulation.hpp:
+
+pointFinder.hpp:
 
 /usr/local/include/opencv4/opencv2/calib3d/calib3d.hpp:
 
@@ -440,6 +480,8 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
 /usr/local/include/opencv4/opencv2/stitching/detail/seam_finders.hpp:
 
 /usr/local/include/opencv4/opencv2/stitching/detail/camera.hpp:
+
+/usr/include/c++/12/bits/regex_executor.tcc:
 
 /usr/include/c++/12/bits/deque.tcc:
 
@@ -469,6 +511,8 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
 
 /usr/local/include/opencv4/opencv2/objdetect/aruco_detector.hpp:
 
+/usr/include/c++/12/stack:
+
 /usr/local/include/opencv4/opencv2/objdetect.hpp:
 
 /usr/local/include/opencv4/opencv2/ml/ml.inl.hpp:
@@ -480,12 +524,6 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
 /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp:
 
 /usr/local/include/opencv4/opencv2/imgproc.hpp:
-
-/usr/local/include/opencv4/opencv2/imgcodecs.hpp:
-
-/usr/local/include/opencv4/opencv2/objdetect/charuco_detector.hpp:
-
-/usr/local/include/opencv4/opencv2/highgui.hpp:
 
 /usr/local/include/opencv4/opencv2/flann/sampling.h:
 
@@ -567,6 +605,12 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
 
 /usr/local/include/opencv4/opencv2/dnn.hpp:
 
+/usr/local/include/opencv4/opencv2/imgcodecs.hpp:
+
+/usr/local/include/opencv4/opencv2/objdetect/charuco_detector.hpp:
+
+/usr/local/include/opencv4/opencv2/highgui.hpp:
+
 /usr/local/include/opencv4/opencv2/flann/config.h:
 
 /usr/local/include/opencv4/opencv2/features2d.hpp:
@@ -619,6 +663,8 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
 
 /usr/include/c++/12/stdexcept:
 
+/usr/include/c++/12/bits/regex_compiler.h:
+
 /usr/include/c++/12/system_error:
 
 /usr/include/c++/12/bits/locale_classes.tcc:
@@ -644,6 +690,8 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
 /usr/include/c++/12/bits/list.tcc:
 
 /usr/local/include/opencv4/opencv2/core/cvstd.inl.hpp:
+
+/usr/include/c++/12/bits/regex_error.h:
 
 /usr/local/include/opencv4/opencv2/core/operations.hpp:
 
@@ -683,6 +731,10 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
 
 /usr/include/c++/12/bits/stl_heap.h:
 
+/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
+
+/usr/include/linux/limits.h:
+
 /usr/local/include/opencv4/opencv2/highgui/highgui.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
@@ -692,6 +744,10 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
 /usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
 
 /usr/include/c++/12/ext/concurrence.h:
+
+/usr/local/include/opencv4/opencv2/opencv_modules.hpp:
+
+/usr/lib/gcc/x86_64-linux-gnu/12/include/syslimits.h:
 
 /usr/include/c++/12/iomanip:
 
@@ -751,8 +807,6 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
-
 /usr/include/c++/12/cstdint:
 
 /usr/include/c++/12/bits/stl_relops.h:
@@ -762,6 +816,8 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: main.cpp \
 /usr/include/c++/12/bits/uniform_int_dist.h:
 
 /usr/include/c++/12/bits/ptr_traits.h:
+
+/usr/include/c++/12/bits/regex.tcc:
 
 /usr/local/include/opencv4/opencv2/core/bufferpool.hpp:
 
@@ -793,21 +849,17 @@ main.cpp:
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
-/usr/local/include/opencv4/opencv2/core.hpp:
+/usr/include/x86_64-linux-gnu/c++/12/bits/ctype_inline.h:
 
-/usr/include/c++/12/bits/char_traits.h:
+/usr/include/x86_64-linux-gnu/c++/12/bits/atomic_word.h:
 
-/usr/include/c++/12/cfloat:
+/usr/include/x86_64-linux-gnu/asm/errno.h:
 
-/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
 
-/usr/include/linux/limits.h:
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
-
-/usr/include/linux/errno.h:
-
-/usr/include/c++/12/climits:
+/usr/local/include/opencv4/opencv2/core/version.hpp:
 
 /usr/include/c++/12/array:
 
@@ -825,31 +877,21 @@ main.cpp:
 
 /usr/include/c++/12/tr1/exp_integral.tcc:
 
-/usr/include/x86_64-linux-gnu/c++/12/bits/ctype_inline.h:
-
-/usr/include/x86_64-linux-gnu/c++/12/bits/atomic_word.h:
-
-/usr/include/x86_64-linux-gnu/asm/errno.h:
-
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
-
-/usr/include/stdc-predef.h:
-
-/usr/include/c++/12/bits/move.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
 
 /usr/local/include/opencv4/opencv2/core/cvdef.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+/usr/include/stdc-predef.h:
 
-/usr/local/include/opencv4/opencv2/core/version.hpp:
+/usr/include/c++/12/bits/move.h:
 
-/usr/local/include/opencv4/opencv2/opencv_modules.hpp:
+/usr/include/x86_64-linux-gnu/bits/time64.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/12/include/syslimits.h:
+/usr/include/c++/12/bits/atomic_lockfree_defines.h:
 
 /usr/include/c++/12/limits:
 
@@ -882,6 +924,18 @@ main.cpp:
 /usr/include/c++/12/new:
 
 /usr/include/features.h:
+
+/usr/local/include/opencv4/opencv2/core.hpp:
+
+/usr/include/c++/12/bits/char_traits.h:
+
+/usr/include/c++/12/cfloat:
+
+/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/c++/12/climits:
 
 /usr/include/x86_64-linux-gnu/c++/12/bits/os_defines.h:
 
@@ -921,15 +975,23 @@ main.cpp:
 
 /usr/local/include/opencv4/opencv2/stitching/warpers.hpp:
 
+/usr/include/stdint.h:
+
 /usr/include/endian.h:
 
 /usr/include/c++/12/bits/predefined_ops.h:
 
-/usr/include/stdint.h:
-
 /usr/include/c++/12/bits/string_view.tcc:
 
+/usr/include/c++/12/deque:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+
+/usr/include/c++/12/ext/type_traits.h:
+
 /usr/include/c++/12/bits/basic_string.h:
+
+/usr/include/c++/12/bits/regex_compiler.tcc:
 
 /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp:
 
@@ -940,16 +1002,6 @@ main.cpp:
 /usr/include/asm-generic/errno-base.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
-
-/usr/include/c++/12/deque:
-
-/usr/include/c++/12/ext/type_traits.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/time64.h:
-
-/usr/include/c++/12/bits/atomic_lockfree_defines.h:
 
 /usr/include/c++/12/bits/std_abs.h:
 
@@ -1071,6 +1123,8 @@ main.cpp:
 
 /usr/include/x86_64-linux-gnu/c++/12/bits/c++allocator.h:
 
+/usr/include/c++/12/regex:
+
 /usr/include/c++/12/pstl/glue_algorithm_defs.h:
 
 /usr/include/c++/12/bits/localefwd.h:
@@ -1141,11 +1195,15 @@ main.cpp:
 
 /usr/include/c++/12/tr1/gamma.tcc:
 
+Camera.hpp:
+
 /usr/include/c++/12/tr1/special_function_util.h:
 
 /usr/include/c++/12/cwchar:
 
 /usr/include/c++/12/tr1/bessel_function.tcc:
+
+performance.hpp:
 
 /usr/local/include/opencv4/opencv2/flann/defines.h:
 
@@ -1250,6 +1308,8 @@ main.cpp:
 /usr/include/c++/12/bits/shared_ptr_atomic.h:
 
 /usr/include/assert.h:
+
+/usr/include/c++/12/bits/regex_constants.h:
 
 /usr/local/include/opencv4/opencv2/core/types.hpp:
 
