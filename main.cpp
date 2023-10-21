@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <fstream>
 
 #include "./libs/pointFinder.hpp"
 #include "./libs/Triangulation.hpp"
@@ -23,13 +25,39 @@ double scale = 60;
 
 #define log(smth) std::cout << smth << std::endl;
 
-int main(){
+void CamFinder(){
+    cv::VideoCapture capture;
+    int cameraIndex = 0; // Start with the first camera (index 0)
 
+    // Redirect stderr to a null stream to suppress warning and error messages
+    std::ofstream nullStream;
+    std::streambuf* originalErrorStream = std::cerr.rdbuf(nullStream.rdbuf());
+
+    while (cameraIndex < 500) {
+        capture.open(cameraIndex);
+
+        if (capture.isOpened()) {
+            std::cout << "Camera index " << cameraIndex << " is available." << std::endl;
+            capture.release(); // Release the camera
+        }
+
+        cameraIndex++; // Try the next camera index
+    }
+
+    // Restore the original stderr stream
+    std::cerr.rdbuf(originalErrorStream);
+
+}
+
+int main(){
+    
+    CamFinder();
     pfm::FPSCounter fpsCounter;
 
     cv::Mat frame;
     cv::VideoCapture cap;
-    cap.open(0);
+    cap.open(202);
+    cap.set(cv::CAP_PROP_FPS, 75);
 
     if (!cap.isOpened()) {
         std::cerr << "ERROR! Unable to open camera\n";
@@ -45,12 +73,13 @@ int main(){
     std::vector<std::vector<cv::Point3f> > objpoints; 
     std::vector<std::vector<cv::Point2f> > imgpoints;
 
-    cam::CameraParams(3, CHECKERBOARD, reziedImgSize, 5, cameraMatrix, distCoeffs, &objpoints, &imgpoints);
-    
+    cam::loadCameraCalibration("Cameras/1/calibration.xml", cameraMatrix, distCoeffs);
+
     for (;;)
     {
         // wait for a new frame from camera and store it into 'frame'
         cap.read(frame);
+        //log(frame.size().width << " : " << frame.size().height)
         // check if we succeeded
         if (frame.empty()) {
             std::cerr << "ERROR! blank frame grabbed\n";
@@ -59,12 +88,21 @@ int main(){
         // show live and wait for a key with timeout long enough to show images
         cv::Mat camT, camR;
         bool pos = cam::CamPosARUCO(frame, cameraMatrix, distCoeffs, &camR, &camT);
+        if(pos){
+            cv::Mat aruco = frame.clone();
 
+            cv::drawFrameAxes(aruco, cameraMatrix, distCoeffs, -camR, -camT, 1);
+            imshow("aruco", aruco);
+        }
+
+        cv::Mat undistord = cam::undistordImage(frame, cameraMatrix, distCoeffs);
+        imshow("u", frame);
         imshow("Live", frame);
+        
 
 
         int key = cv::waitKey(1);
-        //sfpsCounter.update();
+        fpsCounter.update();
         //log(fpsCounter.getFPS());
 
         if (key == 13) {

@@ -360,8 +360,12 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: /home/hiha/c++/Camera/main.cpp \
  /usr/local/include/opencv4/opencv2/calib3d/calib3d.hpp \
  /usr/local/include/opencv4/opencv2/highgui/highgui.hpp \
  /usr/local/include/opencv4/opencv2/imgproc/imgproc.hpp \
- /home/hiha/c++/Camera/pointFinder.hpp \
- /home/hiha/c++/Camera/Triangulation.hpp /usr/include/c++/12/regex \
+ /usr/include/c++/12/fstream \
+ /usr/include/x86_64-linux-gnu/c++/12/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/12/bits/c++io.h \
+ /usr/include/c++/12/bits/fstream.tcc \
+ /home/hiha/c++/Camera/./libs/pointFinder.hpp \
+ /home/hiha/c++/Camera/./libs/Triangulation.hpp /usr/include/c++/12/regex \
  /usr/include/c++/12/bitset /usr/include/c++/12/stack \
  /usr/include/c++/12/bits/stl_stack.h \
  /usr/include/c++/12/bits/regex_constants.h \
@@ -375,4 +379,8 @@ CMakeFiles/DisplayImage.dir/main.cpp.o: /home/hiha/c++/Camera/main.cpp \
  /usr/include/c++/12/bits/regex.h /usr/include/c++/12/bits/regex.tcc \
  /usr/include/c++/12/bits/regex_executor.h \
  /usr/include/c++/12/bits/regex_executor.tcc \
- /home/hiha/c++/Camera/Camera.hpp /home/hiha/c++/Camera/performance.hpp
+ /home/hiha/c++/Camera/./libs/Camera.hpp /usr/include/c++/12/filesystem \
+ /usr/include/c++/12/bits/fs_fwd.h /usr/include/c++/12/bits/fs_path.h \
+ /usr/include/c++/12/codecvt /usr/include/c++/12/bits/fs_dir.h \
+ /usr/include/c++/12/bits/fs_ops.h \
+ /home/hiha/c++/Camera/./libs/performance.hpp

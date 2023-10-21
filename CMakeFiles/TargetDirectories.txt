@@ -1,3 +1,4 @@
-/home/hiha/c++/Camera/CMakeFiles/DisplayImage.dir
+/home/hiha/c++/Camera/CMakeFiles/main.dir
+/home/hiha/c++/Camera/CMakeFiles/CameraCalibration.dir
 /home/hiha/c++/Camera/CMakeFiles/edit_cache.dir
 /home/hiha/c++/Camera/CMakeFiles/rebuild_cache.dir

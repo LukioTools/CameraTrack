@@ -117,24 +117,61 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named DisplayImage
+# Target rules for targets named main
 
 # Build rule for target.
-DisplayImage: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 DisplayImage
-.PHONY : DisplayImage
+main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
+.PHONY : main
 
 # fast build rule for target.
-DisplayImage/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DisplayImage.dir/build.make CMakeFiles/DisplayImage.dir/build
-.PHONY : DisplayImage/fast
+main/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
+
+#=============================================================================
+# Target rules for targets named CameraCalibration
+
+# Build rule for target.
+CameraCalibration: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CameraCalibration
+.PHONY : CameraCalibration
+
+# fast build rule for target.
+CameraCalibration/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraCalibration.dir/build.make CMakeFiles/CameraCalibration.dir/build
+.PHONY : CameraCalibration/fast
+
+CameraCalibration.o: CameraCalibration.cpp.o
+.PHONY : CameraCalibration.o
+
+# target to build an object file
+CameraCalibration.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraCalibration.dir/build.make CMakeFiles/CameraCalibration.dir/CameraCalibration.cpp.o
+.PHONY : CameraCalibration.cpp.o
+
+CameraCalibration.i: CameraCalibration.cpp.i
+.PHONY : CameraCalibration.i
+
+# target to preprocess a source file
+CameraCalibration.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraCalibration.dir/build.make CMakeFiles/CameraCalibration.dir/CameraCalibration.cpp.i
+.PHONY : CameraCalibration.cpp.i
+
+CameraCalibration.s: CameraCalibration.cpp.s
+.PHONY : CameraCalibration.s
+
+# target to generate assembly for a file
+CameraCalibration.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraCalibration.dir/build.make CMakeFiles/CameraCalibration.dir/CameraCalibration.cpp.s
+.PHONY : CameraCalibration.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DisplayImage.dir/build.make CMakeFiles/DisplayImage.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -142,7 +179,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DisplayImage.dir/build.make CMakeFiles/DisplayImage.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -150,7 +187,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DisplayImage.dir/build.make CMakeFiles/DisplayImage.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -161,7 +198,11 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... DisplayImage"
+	@echo "... CameraCalibration"
+	@echo "... main"
+	@echo "... CameraCalibration.o"
+	@echo "... CameraCalibration.i"
+	@echo "... CameraCalibration.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

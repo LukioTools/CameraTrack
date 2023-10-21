@@ -1,7 +1,12 @@
 [
 {
   "directory": "/home/hiha/c++/Camera/build",
-  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/DisplayImage.dir/main.cpp.o -c /home/hiha/c++/Camera/main.cpp",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/main.dir/main.cpp.o -c /home/hiha/c++/Camera/main.cpp",
   "file": "/home/hiha/c++/Camera/main.cpp"
+},
+{
+  "directory": "/home/hiha/c++/Camera/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/CameraCalibration.dir/CameraCalibration.cpp.o -c /home/hiha/c++/Camera/CameraCalibration.cpp",
+  "file": "/home/hiha/c++/Camera/CameraCalibration.cpp"
 }
 ]
