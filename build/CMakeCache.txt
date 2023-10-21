@@ -147,7 +147,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=CameraCalibration
+CMAKE_PROJECT_NAME:STATIC=CameraPosition
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -219,6 +219,15 @@ CameraCalibration_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 CameraCalibration_SOURCE_DIR:STATIC=/home/hiha/c++/Camera
+
+//Value Computed by CMake
+CameraPosition_BINARY_DIR:STATIC=/home/hiha/c++/Camera/build
+
+//Value Computed by CMake
+CameraPosition_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+CameraPosition_SOURCE_DIR:STATIC=/home/hiha/c++/Camera
 
 //Value Computed by CMake
 DisplayImage_BINARY_DIR:STATIC=/home/hiha/c++/Camera/build

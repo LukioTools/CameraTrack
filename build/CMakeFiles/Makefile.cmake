@@ -51,4 +51,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/main.dir/DependInfo.cmake"
   "CMakeFiles/CameraCalibration.dir/DependInfo.cmake"
+  "CMakeFiles/CameraPosition.dir/DependInfo.cmake"
   )

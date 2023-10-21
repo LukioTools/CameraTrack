@@ -93,10 +93,17 @@ int main(){
         int key = cv::waitKey(1);
         if (key == 13) {
             cal = !cal;
-            log("keypress");
+            
+            if(cal){
+                log("starting calibration")
+            }else {
+                log("ended calibration")
+            }
+
         }
 
         if (key == 8) {
+            log("exiting calibration")
             break;
         }
 
@@ -140,7 +147,7 @@ int main(){
         bool outout = cam::CameraParams(CalibrationImages, CHECKERBOARD, 1, imgSize, cameraMatrix,cameraDistCoeffs);
         log("done");
         log("Saving camera params to file")
-        bool saved = cam::saveCameraCalibration("./Cameras/" + std::to_string(camID), "calibration.xml", cameraMatrix, cameraDistCoeffs);
+        bool saved = cam::saveCameraCalibration(std::to_string(camID), cameraMatrix, cameraDistCoeffs);
         log("saved");
     }
     

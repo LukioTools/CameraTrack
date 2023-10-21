@@ -8,5 +8,10 @@
   "directory": "/home/hiha/c++/Camera/build",
   "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/CameraCalibration.dir/CameraCalibration.cpp.o -c /home/hiha/c++/Camera/CameraCalibration.cpp",
   "file": "/home/hiha/c++/Camera/CameraCalibration.cpp"
+},
+{
+  "directory": "/home/hiha/c++/Camera/build",
+  "command": "/usr/bin/g++  -isystem /usr/local/include/opencv4 -g -o CMakeFiles/CameraPosition.dir/CameraPosition.cpp.o -c /home/hiha/c++/Camera/CameraPosition.cpp",
+  "file": "/home/hiha/c++/Camera/CameraPosition.cpp"
 }
 ]

@@ -13,7 +13,6 @@
 #include <fstream>
 
 #include "./libs/pointFinder.hpp"
-#include "./libs/Triangulation.hpp"
 #include "./libs/Camera.hpp"
 #include "./libs/performance.hpp"
 
@@ -87,7 +86,7 @@ int main(){
         }
         // show live and wait for a key with timeout long enough to show images
         cv::Mat camT, camR;
-        bool pos = cam::CamPosARUCO(frame, cameraMatrix, distCoeffs, &camR, &camT);
+        bool pos = cam::CamPosARUCO(frame, cameraMatrix, distCoeffs, camR, camT);
         if(pos){
             cv::Mat aruco = frame.clone();
 

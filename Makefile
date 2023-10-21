@@ -142,6 +142,19 @@ CameraCalibration/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraCalibration.dir/build.make CMakeFiles/CameraCalibration.dir/build
 .PHONY : CameraCalibration/fast
 
+#=============================================================================
+# Target rules for targets named CameraPosition
+
+# Build rule for target.
+CameraPosition: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CameraPosition
+.PHONY : CameraPosition
+
+# fast build rule for target.
+CameraPosition/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraPosition.dir/build.make CMakeFiles/CameraPosition.dir/build
+.PHONY : CameraPosition/fast
+
 CameraCalibration.o: CameraCalibration.cpp.o
 .PHONY : CameraCalibration.o
 
@@ -165,6 +178,30 @@ CameraCalibration.s: CameraCalibration.cpp.s
 CameraCalibration.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraCalibration.dir/build.make CMakeFiles/CameraCalibration.dir/CameraCalibration.cpp.s
 .PHONY : CameraCalibration.cpp.s
+
+CameraPosition.o: CameraPosition.cpp.o
+.PHONY : CameraPosition.o
+
+# target to build an object file
+CameraPosition.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraPosition.dir/build.make CMakeFiles/CameraPosition.dir/CameraPosition.cpp.o
+.PHONY : CameraPosition.cpp.o
+
+CameraPosition.i: CameraPosition.cpp.i
+.PHONY : CameraPosition.i
+
+# target to preprocess a source file
+CameraPosition.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraPosition.dir/build.make CMakeFiles/CameraPosition.dir/CameraPosition.cpp.i
+.PHONY : CameraPosition.cpp.i
+
+CameraPosition.s: CameraPosition.cpp.s
+.PHONY : CameraPosition.s
+
+# target to generate assembly for a file
+CameraPosition.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraPosition.dir/build.make CMakeFiles/CameraPosition.dir/CameraPosition.cpp.s
+.PHONY : CameraPosition.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -199,10 +236,14 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... CameraCalibration"
+	@echo "... CameraPosition"
 	@echo "... main"
 	@echo "... CameraCalibration.o"
 	@echo "... CameraCalibration.i"
 	@echo "... CameraCalibration.s"
+	@echo "... CameraPosition.o"
+	@echo "... CameraPosition.i"
+	@echo "... CameraPosition.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -1,5 +1,6 @@
 #include <opencv2/calib3d.hpp>
 #include <opencv2/core/mat.hpp>
+#include <opencv2/core/matx.hpp>
 #include <opencv2/core/types.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/opencv.hpp>
@@ -8,9 +9,12 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <stdio.h>
 #include <iostream>
+#include <string>
 #include <vector>
 #include <iostream>
 #include <filesystem>
+
+#include "./Triangulation.hpp"
 
 namespace fs = std::filesystem;
 
@@ -202,7 +206,7 @@ namespace cam {
     }
     }
 
-    bool CamPosARUCO(cv::Mat& image, cv::Mat cameraMatrix, cv::Mat distCoeffs, cv::Mat *rotationVector, cv::Mat *translationVector){
+    bool CamPosARUCO(cv::Mat& image, cv::Mat cameraMatrix, cv::Mat distCoeffs, cv::Mat& rotationVector, cv::Mat& translationVector){
         std::vector<int> markerIds;
         std::vector<std::vector<cv::Point2f>> markerCorners, rejectedCandidates;
 
@@ -217,8 +221,8 @@ namespace cam {
             std::vector<cv::Point3f> objectPoints = {cv::Point3f(0,1,0), cv::Point3f(1,1,0), cv::Point3f(1,0,0), cv::Point3f(0,0,0)};
             cv::Mat r, t;
             cv::solvePnP(objectPoints, markerCorners[0], cameraMatrix, distCoeffs, r, t);
-            *rotationVector = -r;
-            *translationVector = -t;
+            rotationVector = -r;
+            translationVector = -t;
             return true;
         }
         else {
@@ -265,17 +269,19 @@ namespace cam {
     }
 
     // Function to save camera matrix and distortion coefficients to a file
-    bool saveCameraCalibration(const std::string& directory, const std::string& filename, const cv::Mat& cameraMatrix, const cv::Mat& distCoeffs) {
+    bool saveCameraCalibration(std::string cam, const cv::Mat& cameraMatrix, const cv::Mat& distCoeffs) {
         // Create the directory if it doesn't exist
-        if (!fs::exists(directory)) {
-            if (!fs::create_directories(directory)) {
+        cam = "Cameras/" + cam;
+
+        if (!fs::exists(cam)) {
+            if (!fs::create_directories(cam)) {
                 std::cerr << "Failed to create the directory." << std::endl;
                 return false;
             }
         }
 
         // Create the full file path
-        std::string filePath = directory + "/" + filename;
+        std::string filePath = cam + "/" + "calibration.xml";
 
         cv::FileStorage fs(filePath, cv::FileStorage::WRITE);
         if (!fs.isOpened()) {
@@ -288,8 +294,9 @@ namespace cam {
     }
 
     // Function to load camera matrix and distortion coefficients from a file
-    bool loadCameraCalibration(const std::string& filename, cv::Mat& cameraMatrix, cv::Mat& distCoeffs) {
-        cv::FileStorage fs(filename, cv::FileStorage::READ);
+    bool loadCameraCalibration(std::string cam, cv::Mat& cameraMatrix, cv::Mat& distCoeffs) {
+        cam = "Cameras/" + cam + "/";
+        cv::FileStorage fs(cam + "calibration.xml", cv::FileStorage::READ);
         if (!fs.isOpened()) {
             return false;
         }
@@ -298,5 +305,44 @@ namespace cam {
         fs.release();
         return true;
     }
+
+    bool saveCameraPosition(std::string cam, const cv::Vec3d rot, const cv::Vec3d pos) {
+        // Create the directory if it doesn't exist
+        cam = "Cameras/" + cam;
+
+        if (!fs::exists(cam)) {
+            if (!fs::create_directories(cam)) {
+                std::cerr << "Failed to create the directory." << std::endl;
+                return false;
+            }
+        }
+
+        // Create the full file path
+        std::string filePath = cam + "/" + "transform.xml";
+
+        cv::FileStorage fs(filePath, cv::FileStorage::WRITE);
+        if (!fs.isOpened()) {
+            return false;
+        }
+        fs << "CameraRotation" << rot;
+        fs << "CameraPsition" << pos;
+        fs.release();
+        return true;
+    }
+
+    // Function to load camera matrix and distortion coefficients from a file
+    // Function to load camera matrix and distortion coefficients from a file
+    bool loadCameraPosition(std::string cam, cv::Vec3d& cameraRotation, cv::Vec3d& cameraPosition) {
+        cam = "Cameras/" + cam + "/";
+        cv::FileStorage fs(cam + "transform.xml", cv::FileStorage::READ);
+        if (!fs.isOpened()) {
+            return false;
+        }
+        fs["CameraRotation"] >> cameraRotation;
+        fs["CameraPsition"] >> cameraPosition;
+        fs.release();
+        return true;
+    }
+
 
 }

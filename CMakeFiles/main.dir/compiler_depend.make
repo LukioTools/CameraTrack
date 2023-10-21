@@ -430,6 +430,13 @@ CMakeFiles/main.dir/main.cpp.o: main.cpp \
   /usr/include/x86_64-linux-gnu/c++/12/bits/c++io.h \
   /usr/include/c++/12/bits/fstream.tcc \
   libs/pointFinder.hpp \
+  libs/Camera.hpp \
+  /usr/include/c++/12/filesystem \
+  /usr/include/c++/12/bits/fs_fwd.h \
+  /usr/include/c++/12/bits/fs_path.h \
+  /usr/include/c++/12/codecvt \
+  /usr/include/c++/12/bits/fs_dir.h \
+  /usr/include/c++/12/bits/fs_ops.h \
   libs/Triangulation.hpp \
   /usr/include/c++/12/regex \
   /usr/include/c++/12/bitset \
@@ -447,19 +454,11 @@ CMakeFiles/main.dir/main.cpp.o: main.cpp \
   /usr/include/c++/12/bits/regex.tcc \
   /usr/include/c++/12/bits/regex_executor.h \
   /usr/include/c++/12/bits/regex_executor.tcc \
-  libs/Camera.hpp \
-  /usr/include/c++/12/filesystem \
-  /usr/include/c++/12/bits/fs_fwd.h \
-  /usr/include/c++/12/bits/fs_path.h \
-  /usr/include/c++/12/codecvt \
-  /usr/include/c++/12/bits/fs_dir.h \
-  /usr/include/c++/12/bits/fs_ops.h \
+  /usr/include/tinyxml2.h \
   libs/performance.hpp
 
 
-/usr/include/c++/12/codecvt:
-
-libs/Camera.hpp:
+/usr/include/tinyxml2.h:
 
 /usr/include/c++/12/bits/regex_executor.h:
 
@@ -480,6 +479,10 @@ libs/performance.hpp:
 /usr/include/c++/12/bitset:
 
 libs/Triangulation.hpp:
+
+/usr/include/c++/12/codecvt:
+
+libs/Camera.hpp:
 
 /usr/include/c++/12/bits/fstream.tcc:
 

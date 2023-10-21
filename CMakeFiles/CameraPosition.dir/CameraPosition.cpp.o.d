@@ -1,5 +1,5 @@
-CMakeFiles/main.dir/main.cpp.o: /home/hiha/c++/Camera/main.cpp \
- /usr/include/stdc-predef.h \
+CMakeFiles/CameraPosition.dir/CameraPosition.cpp.o: \
+ /home/hiha/c++/Camera/CameraPosition.cpp /usr/include/stdc-predef.h \
  /usr/local/include/opencv4/opencv2/calib3d.hpp \
  /usr/local/include/opencv4/opencv2/core.hpp \
  /usr/local/include/opencv4/opencv2/core/cvdef.h \
@@ -263,6 +263,8 @@ CMakeFiles/main.dir/main.cpp.o: /home/hiha/c++/Camera/main.cpp \
  /usr/local/include/opencv4/opencv2/highgui.hpp \
  /usr/local/include/opencv4/opencv2/imgcodecs.hpp \
  /usr/local/include/opencv4/opencv2/videoio.hpp \
+ /usr/local/include/opencv4/opencv2/imgproc.hpp \
+ /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
  /usr/local/include/opencv4/opencv2/opencv.hpp \
  /usr/local/include/opencv4/opencv2/dnn.hpp \
  /usr/local/include/opencv4/opencv2/dnn/dnn.hpp \
@@ -317,8 +319,6 @@ CMakeFiles/main.dir/main.cpp.o: /home/hiha/c++/Camera/main.cpp \
  /usr/local/include/opencv4/opencv2/flann/index_testing.h \
  /usr/local/include/opencv4/opencv2/flann/timer.h \
  /usr/local/include/opencv4/opencv2/flann/sampling.h \
- /usr/local/include/opencv4/opencv2/imgproc.hpp \
- /usr/local/include/opencv4/opencv2/imgproc/segmentation.hpp \
  /usr/local/include/opencv4/opencv2/ml.hpp \
  /usr/local/include/opencv4/opencv2/ml/ml.inl.hpp \
  /usr/local/include/opencv4/opencv2/objdetect.hpp \
@@ -364,7 +364,6 @@ CMakeFiles/main.dir/main.cpp.o: /home/hiha/c++/Camera/main.cpp \
  /usr/include/x86_64-linux-gnu/c++/12/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/12/bits/c++io.h \
  /usr/include/c++/12/bits/fstream.tcc \
- /home/hiha/c++/Camera/./libs/pointFinder.hpp \
  /home/hiha/c++/Camera/./libs/Camera.hpp /usr/include/c++/12/filesystem \
  /usr/include/c++/12/bits/fs_fwd.h /usr/include/c++/12/bits/fs_path.h \
  /usr/include/c++/12/codecvt /usr/include/c++/12/bits/fs_dir.h \
@@ -382,5 +381,4 @@ CMakeFiles/main.dir/main.cpp.o: /home/hiha/c++/Camera/main.cpp \
  /usr/include/c++/12/bits/regex_compiler.tcc \
  /usr/include/c++/12/bits/regex.h /usr/include/c++/12/bits/regex.tcc \
  /usr/include/c++/12/bits/regex_executor.h \
- /usr/include/c++/12/bits/regex_executor.tcc /usr/include/tinyxml2.h \
- /home/hiha/c++/Camera/./libs/performance.hpp
+ /usr/include/c++/12/bits/regex_executor.tcc /usr/include/tinyxml2.h

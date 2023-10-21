@@ -65,6 +65,7 @@ CMAKE_BINARY_DIR = /home/hiha/c++/Camera
 # The main recursive "all" target.
 all: CMakeFiles/main.dir/all
 all: CMakeFiles/CameraCalibration.dir/all
+all: CMakeFiles/CameraPosition.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -74,6 +75,7 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/main.dir/clean
 clean: CMakeFiles/CameraCalibration.dir/clean
+clean: CMakeFiles/CameraPosition.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -83,7 +85,7 @@ clean: CMakeFiles/CameraCalibration.dir/clean
 CMakeFiles/main.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hiha/c++/Camera/CMakeFiles --progress-num=3,4 "Built target main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hiha/c++/Camera/CMakeFiles --progress-num=5,6 "Built target main"
 .PHONY : CMakeFiles/main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -127,6 +129,32 @@ CameraCalibration: CMakeFiles/CameraCalibration.dir/rule
 CMakeFiles/CameraCalibration.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraCalibration.dir/build.make CMakeFiles/CameraCalibration.dir/clean
 .PHONY : CMakeFiles/CameraCalibration.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/CameraPosition.dir
+
+# All Build rule for target.
+CMakeFiles/CameraPosition.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraPosition.dir/build.make CMakeFiles/CameraPosition.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraPosition.dir/build.make CMakeFiles/CameraPosition.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hiha/c++/Camera/CMakeFiles --progress-num=3,4 "Built target CameraPosition"
+.PHONY : CMakeFiles/CameraPosition.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/CameraPosition.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hiha/c++/Camera/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/CameraPosition.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hiha/c++/Camera/CMakeFiles 0
+.PHONY : CMakeFiles/CameraPosition.dir/rule
+
+# Convenience name for target.
+CameraPosition: CMakeFiles/CameraPosition.dir/rule
+.PHONY : CameraPosition
+
+# clean rule for target.
+CMakeFiles/CameraPosition.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraPosition.dir/build.make CMakeFiles/CameraPosition.dir/clean
+.PHONY : CMakeFiles/CameraPosition.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

@@ -11,6 +11,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <math.h>
 #include <cmath>
+#include "tinyxml2.h"
 
 #define logi(smth) std::cout << smth << std::endl;
 
@@ -37,6 +38,17 @@ namespace gty
         public: double valueX(double y){
             return (-y+c)/-a;
         }
+    };
+
+    class XMLPrinterStream : public tinyxml2::XMLPrinter {
+        public:
+            XMLPrinterStream(std::ostream& stream) : stream_(stream) {}
+
+            virtual void Putc(char ch) override {
+                stream_ << ch;
+            }
+
+            std::ostream& stream_;
     };
 
     class vector3{
@@ -88,10 +100,16 @@ namespace gty
             return (cv::Mat_<double>(3, 1) << x, y, z);
         }
 
-        cv::Mat RotMat(){
+        cv::Mat rotMat(){
             cv::Mat ret;
             cv::Rodrigues(toCVVector(), ret);
             return ret;
+        }
+
+        double magnitude(){
+            double magnitude = 0.0;
+            magnitude = this->x*this->x + this->y*this->y + this->z*this->z;
+            return std::sqrt(magnitude);
         }
 
         vector3(const cv::Mat& rotationMatrix) {
@@ -120,12 +138,100 @@ namespace gty
             return os;
         }
 
-        vector3 operator/(double divisor){
+        vector3 operator/(double& divisor){
             if(divisor != 0){
                 return vector3(x / divisor, y / divisor, z / divisor);
             }else{
                 return *this;
             }
+        }
+
+        vector3 operator/(int& divisor){
+            if(divisor != 0){
+                return vector3(x / divisor, y / divisor, z / divisor);
+            }else{
+                return *this;
+            }
+        }
+
+        vector3 operator/(unsigned long& divisor){
+            if(divisor != 0){
+                return vector3(x / divisor, y / divisor, z / divisor);
+            }else{
+                return *this;
+            }
+        }
+
+        public: vector3 operator+(vector3& vec){
+            vector3 val;
+            val.x = this->x+vec.x;
+            val.y = this->y+vec.y;
+            val.z = this->z+vec.z;
+
+            return val;
+        }
+
+        public: vector3 operator+=(vector3 vec){
+            *this= *this+vec;
+            return *this;
+        }
+
+        public: vector3 operator/=(double vec){
+            *this= *this/vec;
+            return *this;
+        }
+
+        public: vector3 operator/=(int vec){
+            *this= *this/vec;
+            return *this;
+        }
+
+        public: vector3 operator/=(unsigned long val){
+            *this= *this/val;
+            return *this;
+        }
+
+        friend std::ostream& operator<<(std::ostream& os, const vector3& v) {
+            tinyxml2::XMLDocument doc;
+            tinyxml2::XMLElement* root = doc.NewElement("vector3");
+            doc.InsertFirstChild(root);
+
+            tinyxml2::XMLElement* xElem = doc.NewElement("x");
+            xElem->SetText(v.x);
+            root->InsertEndChild(xElem);
+
+            tinyxml2::XMLElement* yElem = doc.NewElement("y");
+            yElem->SetText(v.y);
+            root->InsertEndChild(yElem);
+
+            tinyxml2::XMLElement* zElem = doc.NewElement("z");
+            zElem->SetText(v.z);
+            root->InsertEndChild(zElem);
+
+            XMLPrinterStream printer(os);
+            doc.Accept(&printer);
+            return os;
+        }
+
+        // Overload the >> operator to load from an XML file
+        friend std::istream& operator>>(std::istream& is, vector3& v) {
+            tinyxml2::XMLDocument doc;
+            if (doc.LoadFile("vector3.xml") != tinyxml2::XML_SUCCESS) {
+                std::cerr << "Failed to load XML file." << std::endl;
+                return is;
+            }
+
+            tinyxml2::XMLElement* root = doc.FirstChildElement("vector3");
+            if (!root) {
+                std::cerr << "Invalid XML format." << std::endl;
+                return is;
+            }
+
+            root->FirstChildElement("x")->QueryDoubleText(&v.x);
+            root->FirstChildElement("y")->QueryDoubleText(&v.y);
+            root->FirstChildElement("z")->QueryDoubleText(&v.z);
+
+            return is;
         }
     };
 
@@ -150,6 +256,17 @@ namespace gty
 
 namespace tri
 {
+
+    double dotProduct(gty::vector3 v1, gty::vector3 v2){
+        double result = 0.0;
+        result += v1.x * v2.x + v1.y + v1.y * v2.y + v1.z * v2.z;
+        return result;
+    }
+
+    double similarity(gty::vector3 v1, gty::vector3 v2){
+        return dotProduct(v1, v2) / (v1.magnitude() * v2.magnitude());
+ 
+    }
 
     double scale(double valueIn, double baseMin, double baseMax, double limitMin, double limitMax) {
         return ((limitMax - limitMin) * (valueIn - baseMin) / (baseMax - baseMin)) + limitMin;

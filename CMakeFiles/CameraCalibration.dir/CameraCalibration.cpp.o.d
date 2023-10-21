@@ -367,4 +367,18 @@ CMakeFiles/CameraCalibration.dir/CameraCalibration.cpp.o: \
  /home/hiha/c++/Camera/./libs/Camera.hpp /usr/include/c++/12/filesystem \
  /usr/include/c++/12/bits/fs_fwd.h /usr/include/c++/12/bits/fs_path.h \
  /usr/include/c++/12/codecvt /usr/include/c++/12/bits/fs_dir.h \
- /usr/include/c++/12/bits/fs_ops.h
+ /usr/include/c++/12/bits/fs_ops.h \
+ /home/hiha/c++/Camera/./libs/./Triangulation.hpp \
+ /usr/include/c++/12/regex /usr/include/c++/12/bitset \
+ /usr/include/c++/12/stack /usr/include/c++/12/bits/stl_stack.h \
+ /usr/include/c++/12/bits/regex_constants.h \
+ /usr/include/c++/12/bits/regex_error.h \
+ /usr/include/c++/12/bits/regex_automaton.h \
+ /usr/include/c++/12/bits/regex_automaton.tcc \
+ /usr/include/c++/12/bits/regex_scanner.h \
+ /usr/include/c++/12/bits/regex_scanner.tcc \
+ /usr/include/c++/12/bits/regex_compiler.h \
+ /usr/include/c++/12/bits/regex_compiler.tcc \
+ /usr/include/c++/12/bits/regex.h /usr/include/c++/12/bits/regex.tcc \
+ /usr/include/c++/12/bits/regex_executor.h \
+ /usr/include/c++/12/bits/regex_executor.tcc /usr/include/tinyxml2.h

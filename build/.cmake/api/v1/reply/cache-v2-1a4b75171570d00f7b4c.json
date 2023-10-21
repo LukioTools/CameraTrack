@@ -847,7 +847,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "CameraCalibration"
+			"value" : "CameraPosition"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1155,6 +1155,42 @@
 		},
 		{
 			"name" : "CameraCalibration_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/hiha/c++/Camera"
+		},
+		{
+			"name" : "CameraPosition_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/hiha/c++/Camera/build"
+		},
+		{
+			"name" : "CameraPosition_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "CameraPosition_SOURCE_DIR",
 			"properties" : 
 			[
 				{
