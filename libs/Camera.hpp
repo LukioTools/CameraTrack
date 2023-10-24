@@ -1,3 +1,4 @@
+#pragma once
 #include <opencv2/calib3d.hpp>
 #include <opencv2/core/mat.hpp>
 #include <opencv2/core/matx.hpp>
@@ -23,6 +24,35 @@ namespace fs = std::filesystem;
 #define log(smth) std::cout << smth << std::endl;
 
 namespace cam {
+
+    class Camera{
+        public: int camID;
+        cv::Mat cameraMatrix, DistCoeffs;
+        cv::VideoCapture cap;
+        gty::vector3 position, rotation;
+
+        Camera(int id){
+            camID = id;
+        };
+
+        Camera(int id, cv::Mat cameraMatrix, cv::Mat DistCoeffs, gty::vector3 position, gty::vector3 rotation){
+            this->camID = id;
+            this->cameraMatrix = cameraMatrix;
+            this->DistCoeffs = DistCoeffs;
+            this->position = position;
+            this->rotation = rotation;
+        }
+        Camera(int id, cv::Mat cameraMatrix, cv::Mat DistCoeffs, gty::vector3 position, gty::vector3 rotation, cv::VideoCapture cap){
+            this->camID = id;
+            this->cameraMatrix = cameraMatrix;
+            this->DistCoeffs = DistCoeffs;
+            this->position = position;
+            this->rotation = rotation;
+            this->cap = cap;
+        }
+
+    };
+
     bool CameraParams(int cam, int CHECKERBOARD[2], cv::Size rezizedImg, double scale, cv::Mat& cameraMatrix, cv::Mat& distCoeffs, std::vector<std::vector<cv::Point3f>> *objpoints, std::vector<std::vector<cv::Point2f> > *imgpoints, double *error = nullptr){
 
         // checkboard corner position on image 2d plane
@@ -206,7 +236,7 @@ namespace cam {
     }
     }
 
-    bool CamPosARUCO(cv::Mat& image, cv::Mat cameraMatrix, cv::Mat distCoeffs, cv::Mat& rotationVector, cv::Mat& translationVector){
+    bool ARUCOPos(cv::Mat& image, cv::Mat cameraMatrix, cv::Mat distCoeffs, cv::Mat& rotationVector, cv::Mat& translationVector, cv::Point2f *point = nullptr){
         std::vector<int> markerIds;
         std::vector<std::vector<cv::Point2f>> markerCorners, rejectedCandidates;
 
@@ -215,9 +245,15 @@ namespace cam {
         cv::aruco::Dictionary dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_6X6_250);
         cv::aruco::ArucoDetector detector(dictionary, detectorParams);
 
+        
         detector.detectMarkers(image, markerCorners, markerIds, rejectedCandidates);
-
+        
         if(markerCorners.size() != 0){
+
+            if(point != nullptr){
+                *point = markerCorners[0][0];
+            }
+
             std::vector<cv::Point3f> objectPoints = {cv::Point3f(0,1,0), cv::Point3f(1,1,0), cv::Point3f(1,0,0), cv::Point3f(0,0,0)};
             cv::Mat r, t;
             cv::solvePnP(objectPoints, markerCorners[0], cameraMatrix, distCoeffs, r, t);
@@ -331,16 +367,22 @@ namespace cam {
     }
 
     // Function to load camera matrix and distortion coefficients from a file
-    // Function to load camera matrix and distortion coefficients from a file
-    bool loadCameraPosition(std::string cam, cv::Vec3d& cameraRotation, cv::Vec3d& cameraPosition) {
+    bool loadCameraPosition(std::string cam, gty::vector3& cameraRotation, gty::vector3& cameraPosition) {
+        
+        cv::Vec3d cr, ct;
+        
         cam = "Cameras/" + cam + "/";
         cv::FileStorage fs(cam + "transform.xml", cv::FileStorage::READ);
         if (!fs.isOpened()) {
             return false;
         }
-        fs["CameraRotation"] >> cameraRotation;
-        fs["CameraPsition"] >> cameraPosition;
+        fs["CameraRotation"] >> cr;
+        fs["CameraPsition"] >> ct;
         fs.release();
+
+        cameraPosition = ct;
+        cameraRotation = cr;
+
         return true;
     }
 

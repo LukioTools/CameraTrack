@@ -20,15 +20,15 @@
 #define log(smth) std::cout << smth << std::endl;
 
 class CameraPos{
-    public: gty::vector3 RotationVector, translationVector;
+    public: gty::vector3 rotationVector, translationVector;
 
     CameraPos(cv::Mat cameraRotationVector, cv::Mat translationVector){
-        this->RotationVector = cameraRotationVector;
+        this->rotationVector = cameraRotationVector;
         this->translationVector = translationVector;
     }
 
     CameraPos(){
-        this->RotationVector = cv::Mat();
+        this->rotationVector = cv::Mat();
         this->translationVector = cv::Mat();
     }
 };
@@ -58,21 +58,22 @@ void CamFinder(){
 
 int main(){
 
-    int cvID;
     int camID;
     int maxIterations;
 
+    double scale;
+
     CamFinder();
 
-    log("give camera cv ID")
-    std::cin >>  cvID;
     log("give camera ID")
     std::cin >> camID;
+    log("give size of the aruco marker (mm)")
+    std::cin >> scale;
     log("how many iterations")
     std::cin >>maxIterations;
 
     cv::VideoCapture cap;
-    cap.open(cvID);
+    cap.open(camID);
 
     if (!cap.isOpened()) {
         std::cerr << "ERROR! Unable to open camera\n";
@@ -87,7 +88,7 @@ int main(){
     std::vector<CameraPos> camerapositions;
     bool est = false;
 
-    int iterations;
+    int iterations = 0;
 
     for(;;){
         cap.read(frame);
@@ -116,15 +117,18 @@ int main(){
             break;
         }
 
-        if(iterations == maxIterations) break;
+        if(iterations >= maxIterations){log("done finding positions"); break;}
 
         if (est) {
             cv::Mat rvec, tvec;
-            bool found = cam::CamPosARUCO(frame, cameraMatrix, distCoeffs, rvec, tvec);
+            bool found = cam::ARUCOPos(frame, cameraMatrix, distCoeffs, rvec, tvec);
             
             if(!found) continue;
 
-            camerapositions.push_back(CameraPos(rvec, tvec));
+
+            log(rvec);
+            log(tvec);
+            camerapositions.push_back(CameraPos(-rvec.clone()*scale, -tvec.clone()*scale));
 
             iterations++;
         }
@@ -132,16 +136,20 @@ int main(){
 
     CameraPos average;
 
-    for (int i; i < camerapositions.size(); i++) {
-        average.RotationVector += camerapositions[i].RotationVector;
+    log("size: " << camerapositions.size());
+
+    for (int i = 0; i < camerapositions.size(); i++) {
+        average.rotationVector += camerapositions[i].rotationVector;
         average.translationVector += camerapositions[i].translationVector;
+        log(average.rotationVector.toString());
+        log(average.translationVector.toString());
     }
 
-    average.RotationVector /= camerapositions.size();
+    average.rotationVector /= camerapositions.size();
     average.translationVector /= camerapositions.size();
 
-    for (int i; i < camerapositions.size(); i++) {
-        double similarityRot = tri::similarity(average.RotationVector, camerapositions[i].RotationVector);
+    for (int i = 0; i < camerapositions.size(); i++) {
+        double similarityRot = tri::similarity(average.rotationVector, camerapositions[i].rotationVector);
         double similarityTra = tri::similarity(average.translationVector, camerapositions[i].translationVector);
         log(similarityRot << " : " << similarityTra);
 
@@ -150,15 +158,14 @@ int main(){
         }
     }
 
-    for (int i; i < camerapositions.size(); i++) {
-        average.RotationVector += camerapositions[i].RotationVector;
+    for (int i = 0; i < camerapositions.size(); i++) {
+        average.rotationVector += camerapositions[i].rotationVector;
         average.translationVector += camerapositions[i].translationVector;
     }
 
-    average.RotationVector /= camerapositions.size();
+    average.rotationVector /= camerapositions.size();
     average.translationVector /= camerapositions.size();
 
-    cam::saveCameraPosition(std::to_string(camID), average.RotationVector.toCVVector(), average.RotationVector.toCVVector());
+    cam::saveCameraPosition(std::to_string(camID), average.rotationVector.toCVVector(), average.rotationVector.toCVVector());
     log("position and rotation of camera saved!");
-    
 }   

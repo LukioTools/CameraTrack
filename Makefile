@@ -155,6 +155,32 @@ CameraPosition/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraPosition.dir/build.make CMakeFiles/CameraPosition.dir/build
 .PHONY : CameraPosition/fast
 
+#=============================================================================
+# Target rules for targets named webcamTracking
+
+# Build rule for target.
+webcamTracking: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 webcamTracking
+.PHONY : webcamTracking
+
+# fast build rule for target.
+webcamTracking/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/webcamTracking.dir/build.make CMakeFiles/webcamTracking.dir/build
+.PHONY : webcamTracking/fast
+
+#=============================================================================
+# Target rules for targets named tcp_client
+
+# Build rule for target.
+tcp_client: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tcp_client
+.PHONY : tcp_client
+
+# fast build rule for target.
+tcp_client/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_client.dir/build.make CMakeFiles/tcp_client.dir/build
+.PHONY : tcp_client/fast
+
 CameraCalibration.o: CameraCalibration.cpp.o
 .PHONY : CameraCalibration.o
 
@@ -227,6 +253,54 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+tcp_client.o: tcp_client.cpp.o
+.PHONY : tcp_client.o
+
+# target to build an object file
+tcp_client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_client.dir/build.make CMakeFiles/tcp_client.dir/tcp_client.cpp.o
+.PHONY : tcp_client.cpp.o
+
+tcp_client.i: tcp_client.cpp.i
+.PHONY : tcp_client.i
+
+# target to preprocess a source file
+tcp_client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_client.dir/build.make CMakeFiles/tcp_client.dir/tcp_client.cpp.i
+.PHONY : tcp_client.cpp.i
+
+tcp_client.s: tcp_client.cpp.s
+.PHONY : tcp_client.s
+
+# target to generate assembly for a file
+tcp_client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_client.dir/build.make CMakeFiles/tcp_client.dir/tcp_client.cpp.s
+.PHONY : tcp_client.cpp.s
+
+webcamTracking.o: webcamTracking.cpp.o
+.PHONY : webcamTracking.o
+
+# target to build an object file
+webcamTracking.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/webcamTracking.dir/build.make CMakeFiles/webcamTracking.dir/webcamTracking.cpp.o
+.PHONY : webcamTracking.cpp.o
+
+webcamTracking.i: webcamTracking.cpp.i
+.PHONY : webcamTracking.i
+
+# target to preprocess a source file
+webcamTracking.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/webcamTracking.dir/build.make CMakeFiles/webcamTracking.dir/webcamTracking.cpp.i
+.PHONY : webcamTracking.cpp.i
+
+webcamTracking.s: webcamTracking.cpp.s
+.PHONY : webcamTracking.s
+
+# target to generate assembly for a file
+webcamTracking.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/webcamTracking.dir/build.make CMakeFiles/webcamTracking.dir/webcamTracking.cpp.s
+.PHONY : webcamTracking.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -238,6 +312,8 @@ help:
 	@echo "... CameraCalibration"
 	@echo "... CameraPosition"
 	@echo "... main"
+	@echo "... tcp_client"
+	@echo "... webcamTracking"
 	@echo "... CameraCalibration.o"
 	@echo "... CameraCalibration.i"
 	@echo "... CameraCalibration.s"
@@ -247,6 +323,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... tcp_client.o"
+	@echo "... tcp_client.i"
+	@echo "... tcp_client.s"
+	@echo "... webcamTracking.o"
+	@echo "... webcamTracking.i"
+	@echo "... webcamTracking.s"
 .PHONY : help
 
 

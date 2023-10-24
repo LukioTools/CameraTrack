@@ -1,4 +1,5 @@
-
+#pragma once
+#include <opencv2/core/cvstd.hpp>
 #include <opencv2/core/mat.hpp>
 #include <opencv2/core/matx.hpp>
 #include <opencv2/core/types.hpp>
@@ -11,6 +12,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <math.h>
 #include <cmath>
+#include <string>
 #include "tinyxml2.h"
 
 #define logi(smth) std::cout << smth << std::endl;
@@ -51,34 +53,43 @@ namespace gty
             std::ostream& stream_;
     };
 
+    class vector2{
+        public: double x,y;
+
+        vector2(cv::Point2d p){
+            x=p.x;
+            y=p.y;
+        }
+    };
+
     class vector3{
         public: double x,y,z;
 
-        vector3(cv::Point3d point) {
+        public: vector3(cv::Point3d point) {
             this->x = point.x;
             this->y = point.y;
             this->z = point.z;
         }
 
-        vector3(cv::Vec3d point) {
+        public: vector3(cv::Vec3d point) {
             this->x = point[0];
             this->y = point[1];
             this->z = point[2];
         }
 
-        vector3(double x, double y, double z) {
+        public: vector3(double x, double y, double z) {
             this->x = x;
             this->y = y;
             this->z = z;
         }
 
-        vector3() {
+        public: vector3() {
             this->x = 0;
             this->y = 0;
             this->z = 0;
         }
 
-        vector3 fromCVMat(const cv::Mat& mat) {
+        public: vector3(const cv::Mat& mat) {
             if (mat.rows == 3 && mat.cols == 1) {
                 this->x = mat.at<double>(0, 0);
                 this->y = mat.at<double>(1, 0);
@@ -89,30 +100,37 @@ namespace gty
                 this->y = 0;
                 this->z = 0;
             }
-            return *this;
         }
 
-        cv::Point3d toCVPoint(){
+        public: cv::Point3d toCVPoint(){
             return cv::Point3d(x,y,z);
         }
 
-        cv::Mat toCVVector(){
+        public: cv::Mat toCVVector(){
             return (cv::Mat_<double>(3, 1) << x, y, z);
         }
 
-        cv::Mat rotMat(){
+                
+        public: std::string toJson(){
+            //this is supported by Unity
+            std::stringstream s;
+            s << "{\"x\": " << x << ",\"y\":" << y << ",\"z\":" << z << "}"; 
+            return s.str();
+        }
+
+        public: cv::Mat rotMat(){
             cv::Mat ret;
             cv::Rodrigues(toCVVector(), ret);
             return ret;
         }
 
-        double magnitude(){
+        public: double magnitude(){
             double magnitude = 0.0;
             magnitude = this->x*this->x + this->y*this->y + this->z*this->z;
             return std::sqrt(magnitude);
         }
 
-        vector3(const cv::Mat& rotationMatrix) {
+        public: vector3 fromRotationMatrix(const cv::Mat rotationMatrix) {
             // Ensure the rotationMatrix is a 3x3 matrix
             if (rotationMatrix.rows == 3 && rotationMatrix.cols == 3) {
                 // Convert the rotation matrix to a Rodrigues vector
@@ -123,17 +141,11 @@ namespace gty
                 this->x = rodrigues[0];
                 this->y = rodrigues[1];
                 this->z = rodrigues[2];
-            } else {
-                // Handle the case where the input matrix is not a valid rotation matrix
-                // You could throw an exception or handle it in your preferred way.
-                // For this example, I'm setting x, y, and z to 0 in case of an invalid matrix.
-                this->x = 0;
-                this->y = 0;
-                this->z = 0;
-            }
+            } 
+            return *this;
         }
 
-        friend std::ostream& operator<<(std::ostream& os, const vector3 vec) {
+        public: friend std::ostream& operator<<(std::ostream& os, const vector3 vec) {
             os << "[" << vec.x << ", " << vec.y << ", " << vec.z << "]";
             return os;
         }
@@ -191,6 +203,13 @@ namespace gty
             return *this;
         }
 
+        // Overload the << operator to print the vector
+        public: std::string toString() {
+            std::string s =  "[" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + "]";
+            return s;
+        }
+
+        // Overload the << operator to save to an XML file
         friend std::ostream& operator<<(std::ostream& os, const vector3& v) {
             tinyxml2::XMLDocument doc;
             tinyxml2::XMLElement* root = doc.NewElement("vector3");
@@ -241,6 +260,12 @@ namespace gty
         public: Line3D(vector3 dir, vector3 pos){
             this->dir = dir;
             this->pos = pos;
+        }
+
+        std::string toJson(){
+            std::stringstream s;
+            s << "{ \"rvec\":" << dir.toJson() << ",\"tvec\": " << pos.toJson();
+            return s.str();
         }
     };
 
@@ -295,7 +320,7 @@ namespace tri
     }  
 
     double solveLambda(gty::vector3 pos, gty::vector3 dir){
-        return (dir.x*pos.x-dir.y*pos.y-dir.z*pos.z)/(dir.x*dir.x+dir.y*dir.y, dir.z*dir.z);
+        return (dir.x*pos.x-dir.y*pos.y-dir.z*pos.z)/(dir.x*dir.x+dir.y*dir.y + dir.z*dir.z);
     }
 
     cv::Vec3d rotationVectorToEulerAngles(const cv::Mat& rotationVector) {
@@ -333,8 +358,8 @@ namespace tri
                                         gty::vector3(0,0,-1),
                                     };
 
-    void EstimateIntersection(std::vector<gty::Line3D> lines, cv::Point3d *point, double *dist){
-        cv::Point3d movingPoint = cv::Point3d(-45,32,63);
+    void EstimateIntersection(std::vector<gty::Line3D> lines, cv::Point3d& point, double& dist){
+        cv::Point3d movingPoint = cv::Point3d(1000,1000,1000);
 
         int iterations = 500;
 
@@ -364,12 +389,14 @@ namespace tri
                     bestLenght = distSum;
                 }   
             }   
+
+            //logi(bestDir.to_string());
             
             step = stepSize(i + 10, iterations + 10);
             movingPoint += step*bestDir.toCVPoint();
             //logi(i << " : " << movingPoint << " : " << bestLenght);
         }
-        *point = movingPoint;
-        *dist = bestLenght;
+        point = movingPoint;
+        dist = bestLenght;
     }
 }

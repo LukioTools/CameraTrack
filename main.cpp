@@ -55,7 +55,7 @@ int main(){
 
     cv::Mat frame;
     cv::VideoCapture cap;
-    cap.open(202);
+    cap.open(2);
     cap.set(cv::CAP_PROP_FPS, 75);
 
     if (!cap.isOpened()) {
@@ -72,7 +72,7 @@ int main(){
     std::vector<std::vector<cv::Point3f> > objpoints; 
     std::vector<std::vector<cv::Point2f> > imgpoints;
 
-    cam::loadCameraCalibration("Cameras/1/calibration.xml", cameraMatrix, distCoeffs);
+    cam::loadCameraCalibration("Cameras/2/calibration.xml", cameraMatrix, distCoeffs);
 
     for (;;)
     {
@@ -86,7 +86,7 @@ int main(){
         }
         // show live and wait for a key with timeout long enough to show images
         cv::Mat camT, camR;
-        bool pos = cam::CamPosARUCO(frame, cameraMatrix, distCoeffs, camR, camT);
+        bool pos = cam::ARUCOPos(frame, cameraMatrix, distCoeffs, camR, camT);
         if(pos){
             cv::Mat aruco = frame.clone();
 
@@ -103,11 +103,6 @@ int main(){
         int key = cv::waitKey(1);
         fpsCounter.update();
         //log(fpsCounter.getFPS());
-
-        if (key == 13) {
-            cam::SaveImg(frame, "./Cameras/3/" + std::to_string(c) + ".jpg");
-            c++;
-        }
 
 
 

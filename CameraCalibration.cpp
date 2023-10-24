@@ -51,17 +51,14 @@ void CamFinder(){
 int main(){
     CamFinder();
 
-    int cvID;
     int camID;
 
-    log("give camera cv ID")
-    std::cin >>  cvID;
     log("give camera ID")
     std::cin >> camID;
 
     // Open camera
     cv::VideoCapture cap;
-    cap.open(cvID);
+    cap.open(camID);
 
     // Check for camera errors
     if (!cap.isOpened()) {

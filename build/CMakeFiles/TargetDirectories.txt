@@ -1,5 +1,7 @@
 /home/hiha/c++/Camera/build/CMakeFiles/main.dir
 /home/hiha/c++/Camera/build/CMakeFiles/CameraCalibration.dir
 /home/hiha/c++/Camera/build/CMakeFiles/CameraPosition.dir
+/home/hiha/c++/Camera/build/CMakeFiles/webcamTracking.dir
+/home/hiha/c++/Camera/build/CMakeFiles/tcp_client.dir
 /home/hiha/c++/Camera/build/CMakeFiles/edit_cache.dir
 /home/hiha/c++/Camera/build/CMakeFiles/rebuild_cache.dir
