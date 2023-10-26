@@ -162,6 +162,7 @@ int main(){
         average.rotationVector += camerapositions[i].rotationVector;
         average.translationVector += camerapositions[i].translationVector;
     }
+    
 
     average.rotationVector /= camerapositions.size();
     average.translationVector /= camerapositions.size();

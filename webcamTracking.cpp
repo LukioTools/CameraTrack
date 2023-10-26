@@ -13,8 +13,8 @@
 #include <cstdlib>
 #include <fstream>
 
-#include "./libs/Camera.hpp"
-#include "./libs/tcp.hpp"
+#include "./libs2/Camera.hpp"
+#include "./libs2/tcp.hpp"
 
 #define log(smth) std::cout << smth << std::endl;
 
@@ -149,15 +149,12 @@ int main(){
 
         cv::Point3d Intresection;
         double distance;
+        if(lines.size() == cams.size()){
         tri::EstimateIntersection(lines, Intresection, distance);
 
-        log("position: " << Intresection << " distance: " << distance);
-
-//        cv::Mat last;
-        //cams[0].cap.read(last);
-
-        //cv::drawFrameAxes(last, cams[0].cameraMatrix,cams[0].DistCoeffs,randRot,gty::vector3(Intresection).toCVVector(),1);
-        //cv::imshow("last", last);
+        //log("position: " << Intresection << " distance: " << distance);
+        tcpServer.scene.setScene(cams, gty::vector3(Intresection),lines);
+        }
         cv::waitKey(1);
         
     }

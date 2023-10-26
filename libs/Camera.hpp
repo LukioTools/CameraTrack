@@ -24,7 +24,6 @@ namespace fs = std::filesystem;
 #define log(smth) std::cout << smth << std::endl;
 
 namespace cam {
-
     class Camera{
         public: int camID;
         cv::Mat cameraMatrix, DistCoeffs;
@@ -34,7 +33,7 @@ namespace cam {
         Camera(int id){
             camID = id;
         };
-
+        
         Camera(int id, cv::Mat cameraMatrix, cv::Mat DistCoeffs, gty::vector3 position, gty::vector3 rotation){
             this->camID = id;
             this->cameraMatrix = cameraMatrix;
@@ -235,6 +234,7 @@ namespace cam {
         std::cerr << "Failed to save the image." << std::endl;
     }
     }
+
 
     bool ARUCOPos(cv::Mat& image, cv::Mat cameraMatrix, cv::Mat distCoeffs, cv::Mat& rotationVector, cv::Mat& translationVector, cv::Point2f *point = nullptr){
         std::vector<int> markerIds;
