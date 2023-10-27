@@ -429,14 +429,14 @@ CMakeFiles/webcamTracking.dir/webcamTracking.cpp.o: webcamTracking.cpp \
   /usr/include/x86_64-linux-gnu/c++/12/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/12/bits/c++io.h \
   /usr/include/c++/12/bits/fstream.tcc \
-  libs/Camera.hpp \
+  libs2/Camera.hpp \
   /usr/include/c++/12/filesystem \
   /usr/include/c++/12/bits/fs_fwd.h \
   /usr/include/c++/12/bits/fs_path.h \
   /usr/include/c++/12/codecvt \
   /usr/include/c++/12/bits/fs_dir.h \
   /usr/include/c++/12/bits/fs_ops.h \
-  libs/Triangulation.hpp \
+  libs2/Triangulation.hpp \
   /usr/include/c++/12/regex \
   /usr/include/c++/12/bitset \
   /usr/include/c++/12/stack \
@@ -454,7 +454,7 @@ CMakeFiles/webcamTracking.dir/webcamTracking.cpp.o: webcamTracking.cpp \
   /usr/include/c++/12/bits/regex_executor.h \
   /usr/include/c++/12/bits/regex_executor.tcc \
   /usr/include/tinyxml2.h \
-  libs/tcp.hpp \
+  libs2/tcp.hpp \
   /usr/include/unistd.h \
   /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/environments.h \
@@ -558,7 +558,7 @@ CMakeFiles/webcamTracking.dir/webcamTracking.cpp.o: webcamTracking.cpp \
 
 /usr/include/unistd.h:
 
-libs/tcp.hpp:
+libs2/tcp.hpp:
 
 /usr/include/tinyxml2.h:
 
@@ -578,13 +578,9 @@ libs/tcp.hpp:
 
 /usr/include/c++/12/bitset:
 
-libs/Triangulation.hpp:
-
 /usr/include/linux/close_range.h:
 
 /usr/include/c++/12/codecvt:
-
-libs/Camera.hpp:
 
 /usr/include/c++/12/bits/fstream.tcc:
 
@@ -821,6 +817,8 @@ libs/Camera.hpp:
 /usr/include/c++/12/set:
 
 /usr/include/c++/12/bits/ios_base.h:
+
+libs2/Camera.hpp:
 
 /usr/include/c++/12/ios:
 
@@ -1421,6 +1419,8 @@ webcamTracking.cpp:
 /usr/local/include/opencv4/opencv2/core/cvstd_wrapper.hpp:
 
 /usr/include/c++/12/bits/stl_raw_storage_iter.h:
+
+libs2/Triangulation.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
 

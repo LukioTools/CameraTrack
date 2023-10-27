@@ -227,6 +227,20 @@ namespace gty{
             this->pos = pos;
         }
 
+        Line3D(cv::Mat dirMat, vector3 pos){
+            vector3 d(1,0,0);
+            this->dir = MatVecProduct(dirMat, d);
+        }
+
+        gty::vector3 MatVecProduct(cv::Mat mat, gty::vector3 vec){
+            gty::vector3 output;
+            output.x = mat.at<double>(0,0) * vec.x + mat.at<double>(1,0)*vec.x + mat.at<double>(2,0)*vec.x;
+            output.y = mat.at<double>(0,1) * vec.y + mat.at<double>(1,1)*vec.y + mat.at<double>(2,1)*vec.y;
+            output.z = mat.at<double>(0,2) * vec.z + mat.at<double>(1,2)*vec.z + mat.at<double>(2,2)*vec.z;
+
+            return output;
+        }
+
         std::string toJson(){
             std::stringstream s;
             s << "{\"rvec\":" << dir.toJson() << ",\"tvec\": " << pos.toJson() << "}";
@@ -257,6 +271,71 @@ namespace tri{
         return transformationMatrix;
     }
 
+    cv::Mat extractRotationMatrix(const cv::Mat& transformationMatrix) {
+        // Extract the top-left 3x3 submatrix as the rotation matrix
+        cv::Mat rotationMatrix = transformationMatrix(cv::Rect(0, 0, 3, 3));
+
+        return rotationMatrix;
+    }
+
+    cv::Mat extractTranslationVector(const cv::Mat& transformationMatrix) {
+        // Extract the rightmost column (elements at index 3) as the translation vector
+        cv::Mat translationVector = transformationMatrix(cv::Rect(3, 0, 1, 3));
+
+        return translationVector;
+    }
+
+    cv::Mat averageTransformationMatrix(std::vector<cv::Mat>& matrices) {
+        // Initialize the result matrix with zeros
+        cv::Mat result = cv::Mat::zeros(4, 4, CV_64F);
+
+        // Sum all the transformation matrices
+        for (const cv::Mat& matrix : matrices) {
+            result += matrix;
+        }
+
+        // Calculate the average by dividing by the number of matrices
+        result /= static_cast<double>(matrices.size());
+
+        return result;
+    }
+
+    double scale(double valueIn, double baseMin, double baseMax, double limitMin, double limitMax) {
+        return ((limitMax - limitMin) * (valueIn - baseMin) / (baseMax - baseMin)) + limitMin;
+    }
+
+    double Dist(cv::Point3d p1, cv::Point3d p2){
+        return std::sqrt((p2.x-p1.x)*(p2.x-p1.x)+(p2.y-p1.y)*(p2.y-p1.y)+(p2.z-p1.z)*(p2.z-p1.z));
+    }
+
+    double solveLambda(gty::vector3 pos, gty::vector3 dir){
+        return (dir.x*pos.x-dir.y*pos.y-dir.z*pos.z)/(dir.x*dir.x+dir.y*dir.y + dir.z*dir.z);
+    }
+
+    double stepSize(double current, double max){
+        double scaled = scale(current, 0, max, 0, 1);
+        //return -logWithBase(50, scaled) * 10;
+        return -1*scaled + 1;
+    }
+
+    cv::Point3d ClosestPoint(gty::Line3D line, cv::Point3d point){
+        double lambda = solveLambda(line.pos, line.dir);
+        cv::Point3d solvedPoint;
+        solvedPoint.x = line.pos.x+lambda*line.dir.x;
+        solvedPoint.y = line.pos.y+lambda*line.dir.y;
+        solvedPoint.z = line.pos.z+lambda*line.dir.z;
+        return solvedPoint;
+    }
+
+    std::vector<gty::vector3> dirs = {  
+                                        gty::vector3(1,0,0),
+                                        gty::vector3(-1,0,0), 
+                                        gty::vector3(0,1,0),
+                                        gty::vector3(0,-1,0),
+                                        gty::vector3(0,0,1),
+                                        gty::vector3(0,0,-1),
+                                    };
+
     gty::vector3 MatVecProduct(cv::Mat mat, gty::vector3 vec){
         gty::vector3 output;
         output.x = mat.at<double>(0,0) * vec.x + mat.at<double>(1,0)*vec.x + mat.at<double>(2,0)*vec.x;
@@ -264,6 +343,48 @@ namespace tri{
         output.z = mat.at<double>(0,2) * vec.z + mat.at<double>(1,2)*vec.z + mat.at<double>(2,2)*vec.z;
 
         return output;
+    }
+
+        void EstimateIntersection(std::vector<gty::Line3D> lines, cv::Point3d& point, double& dist){
+        cv::Point3d movingPoint = cv::Point3d(1000,1000,1000);
+
+        int iterations = 500;
+
+        double step = 0.02;
+
+        double bestLenght = std::numeric_limits<double>::max();
+
+        for (int i = 0; i < iterations; i++)
+        {
+            gty::vector3 bestDir;
+            bestLenght = std::numeric_limits<double>::max();
+
+            for (int j = 0; j < dirs.size(); j++)
+            {
+                cv::Point3d np = movingPoint + step*dirs[j].toCVPoint();
+
+                double distSum = 0;
+
+                for (int k = 0; k < lines.size(); k++)
+                {
+                    cv::Point3d lp = ClosestPoint(lines[k], np);
+                    distSum += Dist(np, lp);
+                }
+
+                if(bestLenght > distSum){
+                    bestDir = dirs[j];
+                    bestLenght = distSum;
+                }   
+            }   
+
+            //logi(bestDir.to_string());
+            
+            step = stepSize(i + 10, iterations + 10);
+            movingPoint += step*bestDir.toCVPoint();
+            //logi(i << " : " << movingPoint << " : " << bestLenght);
+        }
+        point = movingPoint;
+        dist = bestLenght;
     }
     
 }

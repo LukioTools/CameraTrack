@@ -24,37 +24,33 @@ namespace tcp{
 
     class Scene{
         public: 
-        std::vector<cv::Mat> camTransform;
+        std::vector<cv::Mat> camTransformation;
         gty::vector3 intersection;
         std::vector<gty::Line3D> lines;
 
         Scene(){
-            for (int i = 0; i < 4; i++) {
-                cv::Mat identity = cv::Mat::eye(4, 4, CV_64F);
-                camTransform.push_back(identity);
-            }
+            camTransformation = std::vector<cv::Mat>();
             intersection = gty::vector3();
             lines = std::vector<gty::Line3D>();
         }
 
         void setScene(std::vector<cam::Camera> cameras, gty::vector3 intersection, std::vector<gty::Line3D> lines){
 
-            camTransform = std::vector<cv::Mat>();
+            camTransformation = std::vector<cv::Mat>();
+            
             
             for (int i = 0; i < cameras.size(); i++)
             {
-                camTransform.push_back(cv::Mat::eye(4, 4, CV_64F));
-                cv::Mat rotationMatrix;
-                cv::Rodrigues(cameras[i].rotation.toCVVector(), rotationMatrix);
-            
+                camTransformation.push_back(cv::Mat::eye(4, 4, CV_64F));
+                
+                cv::Mat rotationMatrix = cameras[i].rMat;
                 // Copy the rotation matrix to the upper-left 3x3 block
-                rotationMatrix.copyTo(camTransform[i](cv::Rect(0, 0, 3, 3)));
-
+                rotationMatrix.copyTo(camTransformation[i](cv::Rect(0, 0, 3, 3)));
                 // Copy the translation vector to the right-most column
-                cameras[i].position.toCVVector().copyTo(camTransform[i](cv::Rect(3, 0, 1, 3)));
+                cameras[i].tMat.toCVVector().copyTo(camTransformation[i](cv::Rect(3, 0, 1, 3)));
 
                 // Set the bottom row to [0 0 0 1]
-                camTransform[i].at<double>(3, 3) = 1.0;
+                camTransformation[i].at<double>(3, 3) = 1.0;
             }
             
 
@@ -70,17 +66,17 @@ namespace tcp{
 
             // Convert camTransform array to JSON
             json << "\"camTransform\": [";
-            for (size_t i = 0; i < camTransform.size(); i++) {
+            for (size_t i = 0; i < camTransformation.size(); i++) {
                 if (i != 0) {
                     json << ',';
                 }
                 json << "{";
-                for (int row = 0; row < camTransform[i].rows; row++) {
-                    for (int col = 0; col < camTransform[i].cols; col++) {
+                for (int row = 0; row < camTransformation[i].rows; row++) {
+                    for (int col = 0; col < camTransformation[i].cols; col++) {
                         if (row != 0 || col != 0) {
                             json << ',';
                         }
-                        json << "\"" << row << "-" << col << "\": " << camTransform[i].at<double>(row, col);
+                        json << "\"" << row << "-" << col << "\": " << camTransformation[i].at<double>(row, col);
                     }
                 }
                 json << "}";

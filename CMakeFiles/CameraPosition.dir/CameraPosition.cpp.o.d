@@ -364,11 +364,11 @@ CMakeFiles/CameraPosition.dir/CameraPosition.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/12/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/12/bits/c++io.h \
  /usr/include/c++/12/bits/fstream.tcc \
- /home/hiha/c++/Camera/./libs/Camera.hpp /usr/include/c++/12/filesystem \
+ /home/hiha/c++/Camera/./libs2/Camera.hpp /usr/include/c++/12/filesystem \
  /usr/include/c++/12/bits/fs_fwd.h /usr/include/c++/12/bits/fs_path.h \
  /usr/include/c++/12/codecvt /usr/include/c++/12/bits/fs_dir.h \
  /usr/include/c++/12/bits/fs_ops.h \
- /home/hiha/c++/Camera/./libs/./Triangulation.hpp \
+ /home/hiha/c++/Camera/./libs2/./Triangulation.hpp \
  /usr/include/c++/12/regex /usr/include/c++/12/bitset \
  /usr/include/c++/12/stack /usr/include/c++/12/bits/stl_stack.h \
  /usr/include/c++/12/bits/regex_constants.h \

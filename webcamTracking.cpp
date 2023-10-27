@@ -81,8 +81,8 @@ int main(){
 
             log("Camera found. Loading camera preferences...");
 
-            cv::Mat cameraMatrix, cameraDistCoeffs;
-            gty::vector3 cameraPos, CameraRot;
+            cv::Mat cameraMatrix, cameraDistCoeffs, CameraRot;
+            gty::vector3 cameraPos;
 
             if(!cam::loadCameraCalibration(std::to_string(camId), cameraMatrix, cameraDistCoeffs)) {
                 log("Camera prefrences not found");
@@ -94,7 +94,7 @@ int main(){
                 continue;
             }
 
-            cams.push_back(cam::Camera(camId, cameraMatrix, cameraDistCoeffs, cameraPos, CameraRot, cv::VideoCapture()));
+            cams.push_back(cam::Camera(camId, cameraMatrix, cameraDistCoeffs, CameraRot.clone(), cameraPos, cv::VideoCapture()));
             cams[cams.size()-1].cap.open(camId);
 
             log("Camera settings loaded up successfully");
@@ -110,55 +110,51 @@ int main(){
 
         std::vector<gty::Line3D> lines;
 
-        cv::Mat randRot;
-
         for (int i = 0; i < cams.size(); i++)
         {
+            
             cv::Mat frame = cv::Mat();
             cams[i].cap.read(frame);
-
-            cv::Mat ap, ar;
+            
+            cv::Mat transformationMatrix;
 
             cv::Point2f cord;
 
-            bool found = cam::ARUCOPos(frame, cams[i].cameraMatrix, cams[i].DistCoeffs, ar,ap, &cord);
+            bool found = cam::camARUCOPos(frame, cams[i].cameraMatrix, cams[i].DistCoeffs, transformationMatrix, &cord);
+            
             if (found)
             {
                 //log("Camera matrix: " << cams[i].cameraMatrix << "DistCoeffs: " << cams[i].DistCoeffs << " position: " << ap << " rotation: " << ar);
                 //cv::drawFrameAxes(frame, cams[i].cameraMatrix, cams[i].DistCoeffs, -ar, -ap, 1);
-                randRot = ar;
                 
                 gty::vector3 localRotVec;
                 localRotVec.x = 5.6*(cord.x/640);
                 localRotVec.y = 4.2*(cord.y/480);
                 localRotVec.z = 3.649;
                 
-                cv::Mat rotationMatrix = localRotVec.rotMat()*cams[i].rotation.rotMat();
+                //log(cams[i].rMat << " : " << localRotVec.toString());
+                cv::Mat rotMat = tri::MatVecProduct(cams[i].rMat, localRotVec).rotMat();
+                
                 //log("rotation matrix: " << rotationMatrix);
                 //log("rotation vector: " << gty::vector3().fromRotationMatrix(rotationMatrix).to_string());
-                lines.push_back(gty::Line3D(gty::vector3().fromRotationMatrix(rotationMatrix), cams[i].position));
+                lines.push_back(gty::Line3D(rotMat, cams[i].tMat));
                 //log(lines[i].dir.to_string());
 
-                cv::drawFrameAxes(frame, cams[i].cameraMatrix, cams[i].DistCoeffs, gty::vector3().fromRotationMatrix(rotationMatrix).toCVVector(), -ap, 1);
-                
+                cv::drawFrameAxes(frame, cams[i].cameraMatrix, cams[i].DistCoeffs, -gty::vector3().fromRotationMatrix(tri::extractRotationMatrix(transformationMatrix)).toCVVector(), -tri::extractTranslationVector(transformationMatrix), 1);
+                cv::imshow(std::to_string(i), frame);
             }
-
-            cv::imshow(std::to_string(i), frame);
-        
-        }
-
         cv::Point3d Intresection;
         double distance;
+        
         if(lines.size() == cams.size()){
         tri::EstimateIntersection(lines, Intresection, distance);
-
+        
         //log("position: " << Intresection << " distance: " << distance);
         tcpServer.scene.setScene(cams, gty::vector3(Intresection),lines);
+        
         }
         cv::waitKey(1);
         
+        }
     }
-    
-
-
 }

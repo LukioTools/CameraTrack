@@ -27,17 +27,18 @@ namespace cam{
             int camID;
             cv::Mat cameraMatrix, DistCoeffs;
             cv::VideoCapture cap;
-            cv::Mat transformationMatrix;
+            cv::Mat rMat;
+            gty::vector3 tMat;
 
             Camera(int id){
                 camID = id;
             };
 
-            Camera(int id, cv::Mat cameraMatrix, cv::Mat DistCoeffs, cv::Mat transformationMatrix, cv::VideoCapture cap){
+            Camera(int id, cv::Mat cameraMatrix, cv::Mat DistCoeffs, cv::Mat rMat, gty::vector3 tMat, cv::VideoCapture cap){
             this->camID = id;
             this->cameraMatrix = cameraMatrix;
             this->DistCoeffs = DistCoeffs;
-            this->transformationMatrix = transformationMatrix;
+            this->rMat = rMat;
             this->cap = cap;
         }
         
@@ -54,7 +55,7 @@ namespace cam{
   
     }
 
-    bool camARUCOPos(cv::Mat& image, cv::Mat cameraMatrix, cv::Mat distCoeffs, cv::Mat& transformationMatrix){
+    bool camARUCOPos(cv::Mat& image, cv::Mat cameraMatrix, cv::Mat distCoeffs, cv::Mat& transformationMatrix, cv::Point2f *point = nullptr){
         std::vector<int> markerIds;
         std::vector<std::vector<cv::Point2f>> markerCorners, rejectedCandidates;
 
@@ -67,11 +68,16 @@ namespace cam{
         detector.detectMarkers(image, markerCorners, markerIds, rejectedCandidates);
 
         if(markerCorners.size() != 0){
+            if(point != nullptr){
+                *point = markerCorners[0][0];
+            }
             std::vector<cv::Point3f> objectPoints = {cv::Point3f(0,1,0), cv::Point3f(1,1,0), cv::Point3f(1,0,0), cv::Point3f(0,0,0)};
             cv::Mat r, t;
             cv::solvePnP(objectPoints, markerCorners[0], cameraMatrix, distCoeffs, r, t);
-            transformationMatrix = tri::createTransformationMatrix(tri::rvecToMat(r), t);
+            transformationMatrix = tri::createTransformationMatrix(tri::rvecToMat(-r), -t);
+            return true;
         }
+        return false;
         
     }
 
@@ -220,6 +226,50 @@ namespace cam{
         fs["CameraMatrix"] >> cameraMatrix;
         fs["DistortionCoeffs"] >> distCoeffs;
         fs.release();
+        return true;
+    }
+
+    bool saveCameraPosition(std::string cam, const cv::Mat rotMat, const cv::Vec3d pos) {
+        // Create the directory if it doesn't exist
+        cam = "Cameras/" + cam;
+
+        if (!fs::exists(cam)) {
+            if (!fs::create_directories(cam)) {
+                std::cerr << "Failed to create the directory." << std::endl;
+                return false;
+            }
+        }
+
+        // Create the full file path
+        std::string filePath = cam + "/" + "transform.xml";
+
+        cv::FileStorage fs(filePath, cv::FileStorage::WRITE);
+        if (!fs.isOpened()) {
+            return false;
+        }
+        fs << "CameraRotation" << rotMat;
+        fs << "CameraPsition" << pos;
+        fs.release();
+        return true;
+    }
+
+    bool loadCameraPosition(std::string cam, cv::Mat& rotMat, gty::vector3& cameraPosition) {
+        
+        cv::Vec3d ct;
+        cv::Mat rm;
+        
+        cam = "Cameras/" + cam + "/";
+        cv::FileStorage fs(cam + "transform.xml", cv::FileStorage::READ);
+        if (!fs.isOpened()) {
+            return false;
+        }
+        fs["CameraRotation"] >> rm;
+        fs["CameraPsition"] >> ct;
+        fs.release();
+
+        cameraPosition = ct;
+        rotMat = rm;
+
         return true;
     }
 
