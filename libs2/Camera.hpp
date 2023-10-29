@@ -273,6 +273,4 @@ namespace cam{
         return true;
     }
 
-    //TODO: saving&loading camera transformation matrix
-
 }

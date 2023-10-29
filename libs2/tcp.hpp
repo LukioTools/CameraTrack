@@ -76,7 +76,7 @@ namespace tcp{
                         if (row != 0 || col != 0) {
                             json << ',';
                         }
-                        json << "\"" << row << "-" << col << "\": " << camTransformation[i].at<double>(row, col);
+                        json << "\"data" << row << "-" << col << "\": " << camTransformation[i].at<double>(row, col);
                     }
                 }
                 json << "}";
@@ -92,7 +92,7 @@ namespace tcp{
                 }
                 json << lines[i].toJson();
             }
-            json << "}";
+            json << "]";
 
             json << "}";
 
