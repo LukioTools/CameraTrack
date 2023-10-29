@@ -19,7 +19,8 @@
 						1,
 						2,
 						3,
-						4
+						4,
+						5
 					]
 				}
 			],
@@ -31,14 +32,15 @@
 					[
 						0
 					],
-					"name" : "tcp_client",
+					"name" : "gui",
 					"targetIndexes" : 
 					[
 						0,
 						1,
 						2,
 						3,
-						4
+						4,
+						5
 					]
 				}
 			],
@@ -47,35 +49,42 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "CameraCalibration::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-CameraCalibration-Debug-146b9c064bcf7c1176b9.json",
+					"jsonFile" : "target-CameraCalibration-Debug-572afb1b02e4b714d34a.json",
 					"name" : "CameraCalibration",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "CameraPosition::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-CameraPosition-Debug-ec6d33e1404fdfde8de3.json",
+					"jsonFile" : "target-CameraPosition-Debug-9af6d5c93250e8cdebd0.json",
 					"name" : "CameraPosition",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
+					"id" : "gui::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-gui-Debug-45abb895684eb13e00bd.json",
+					"name" : "gui",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
 					"id" : "main::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-main-Debug-601416d1229e254dc185.json",
+					"jsonFile" : "target-main-Debug-bcf0bfe1aabf2a4020af.json",
 					"name" : "main",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "tcp_client::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-tcp_client-Debug-e6c6fc7660842acb4d00.json",
+					"jsonFile" : "target-tcp_client-Debug-38657c9ef6e85cb0cf2f.json",
 					"name" : "tcp_client",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "webcamTracking::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-webcamTracking-Debug-c6e82db5ff3980df3306.json",
+					"jsonFile" : "target-webcamTracking-Debug-371a6689b55e21201cdc.json",
 					"name" : "webcamTracking",
 					"projectIndex" : 0
 				}

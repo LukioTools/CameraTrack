@@ -181,6 +181,19 @@ tcp_client/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tcp_client.dir/build.make CMakeFiles/tcp_client.dir/build
 .PHONY : tcp_client/fast
 
+#=============================================================================
+# Target rules for targets named gui
+
+# Build rule for target.
+gui: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gui
+.PHONY : gui
+
+# fast build rule for target.
+gui/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/build
+.PHONY : gui/fast
+
 CameraCalibration.o: CameraCalibration.cpp.o
 .PHONY : CameraCalibration.o
 
@@ -228,6 +241,30 @@ CameraPosition.s: CameraPosition.cpp.s
 CameraPosition.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CameraPosition.dir/build.make CMakeFiles/CameraPosition.dir/CameraPosition.cpp.s
 .PHONY : CameraPosition.cpp.s
+
+GUI.o: GUI.cpp.o
+.PHONY : GUI.o
+
+# target to build an object file
+GUI.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/GUI.cpp.o
+.PHONY : GUI.cpp.o
+
+GUI.i: GUI.cpp.i
+.PHONY : GUI.i
+
+# target to preprocess a source file
+GUI.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/GUI.cpp.i
+.PHONY : GUI.cpp.i
+
+GUI.s: GUI.cpp.s
+.PHONY : GUI.s
+
+# target to generate assembly for a file
+GUI.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gui.dir/build.make CMakeFiles/gui.dir/GUI.cpp.s
+.PHONY : GUI.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -311,6 +348,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... CameraCalibration"
 	@echo "... CameraPosition"
+	@echo "... gui"
 	@echo "... main"
 	@echo "... tcp_client"
 	@echo "... webcamTracking"
@@ -320,6 +358,9 @@ help:
 	@echo "... CameraPosition.o"
 	@echo "... CameraPosition.i"
 	@echo "... CameraPosition.s"
+	@echo "... GUI.o"
+	@echo "... GUI.i"
+	@echo "... GUI.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

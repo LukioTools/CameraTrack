@@ -29,6 +29,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-3.25/Modules/Compiler/GNU.cmake"
   "/usr/share/cmake-3.25/Modules/FindPackageHandleStandardArgs.cmake"
   "/usr/share/cmake-3.25/Modules/FindPackageMessage.cmake"
+  "/usr/share/cmake-3.25/Modules/FindPkgConfig.cmake"
   "/usr/share/cmake-3.25/Modules/Platform/Linux-GNU-C.cmake"
   "/usr/share/cmake-3.25/Modules/Platform/Linux-GNU-CXX.cmake"
   "/usr/share/cmake-3.25/Modules/Platform/Linux-GNU.cmake"
@@ -57,4 +58,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/CameraPosition.dir/DependInfo.cmake"
   "CMakeFiles/webcamTracking.dir/DependInfo.cmake"
   "CMakeFiles/tcp_client.dir/DependInfo.cmake"
+  "CMakeFiles/gui.dir/DependInfo.cmake"
   )

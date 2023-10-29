@@ -33,3 +33,14 @@ find_package(nlohmann_json 3.7.0 REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 add_executable(tcp_client tcp_client.cpp)  # Replace "process.cpp" with your new source file name
 target_link_libraries(tcp_client ${OpenCV_LIBS})
+
+project(gui)
+find_package(OpenCV REQUIRED)
+find_package(nlohmann_json 3.7.0 REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK4 REQUIRED gtk+-3.0)
+include_directories(${GTK3_INCLUDE_DIRS})
+include_directories(${OpenCV_INCLUDE_DIRS})
+add_executable(gui GUI.cpp)  # Replace "process.cpp" with your new source file name
+target_link_libraries(gui ${GTK3_LIBRARIES})
+target_link_libraries(gui ${OpenCV_LIBS})

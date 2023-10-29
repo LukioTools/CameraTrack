@@ -6,7 +6,10 @@
                 "${workspaceFolder}/**",
                 "/usr/local/include/opencv4/**",
                 "/usr/include/tinyxml2.h",
-                "/usr/include/json.hpp"
+                "/usr/include/json.hpp",
+                "/usr/include/gtk-4.0",
+                "/usr/include/glib-4.0",
+                "/usr/include/glib-4.0/glib" 
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
